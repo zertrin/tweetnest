@@ -39,8 +39,6 @@
 				$linkmap = array_combine(array_keys($links), array_keys($flinks));
 			}
 			
-			$http    = 'http'; // possible to change to https (if all hosts support it)
-			
 			foreach($links as $link => $l){
 				if(is_array($l) && array_key_exists("host", $l) && array_key_exists("path", $l)){
 					$domain = domain($l['host']);
@@ -48,35 +46,35 @@
 					if($imgid){
 						if($domain == "twimg.com"){
 							$displaylink = $linkmap ? $linkmap[$link] : $link;
-							$imgs[$displaylink] = $http . "://pbs.twimg.com" . $l['path'] . ":thumb";
+							$imgs[$displaylink] = "//pbs.twimg.com" . $l['path'] . ":thumb";
 						}
 						if($domain == "twitpic.com"){
-							$imgs[$link] = $http . "://twitpic.com/show/thumb/" . $imgid;
+							$imgs[$link] = "//twitpic.com/show/thumb/" . $imgid;
 						}
 						if($domain == "yfrog.com" || $domain == "yfrog.us"){
-							$imgs[$link] = $http . "://yfrog.com/" . $imgid . ".th.jpg";
+							$imgs[$link] = "//yfrog.com/" . $imgid . ".th.jpg";
 						}
 						if($domain == "tweetphoto.com" || $domain == "pic.gd" || $domain == "plixi.com"){
-							$imgs[$link] = $http . "://tweetphotoapi.com/api/TPAPI.svc/imagefromurl?size=thumbnail&url=" . $link;
+							$imgs[$link] = "//tweetphotoapi.com/api/TPAPI.svc/imagefromurl?size=thumbnail&url=" . $link;
 						}
 						if($domain == "twitgoo.com"){
-							$values = simplexml_load_string(getURL($http . "://twitgoo.com/api/message/info/" . $imgid));
+							$values = simplexml_load_string(getURL("//twitgoo.com/api/message/info/" . $imgid));
 							$imgs[$link] = (string)$values->thumburl;
 						}
 						if($domain == "img.ly"){
-							$imgs[$link] = $http . "://img.ly/show/thumb/" . $imgid;
+							$imgs[$link] = "//img.ly/show/thumb/" . $imgid;
 						}
 						if($domain == "pict.mobi"){
-							$imgs[$link] = $http . "://pict.mobi/show/thumb/" . $imgid;
+							$imgs[$link] = "//pict.mobi/show/thumb/" . $imgid;
 						}
 						if($domain == "imgur.com"){
-							$imgs[$link] = $http . "://i.imgur.com/" . $imgid . "s.jpg";
+							$imgs[$link] = "//i.imgur.com/" . $imgid . "s.jpg";
 						}
 						if($domain == "twitvid.com"){
-							$imgs[$link] = $http . "://images.twitvid.com/" . $imgid . ".jpg";
+							$imgs[$link] = "//images.twitvid.com/" . $imgid . ".jpg";
 						}
 						if($domain == "moby.to"){
-							$imgs[$link] = $http . "://moby.to/" . $imgid . ":square";
+							$imgs[$link] = "//moby.to/" . $imgid . ":square";
 						}
 						if($domain == "instagr.am" || $domain == "instagram.com"){
 							$html = (string)getURL($link);
